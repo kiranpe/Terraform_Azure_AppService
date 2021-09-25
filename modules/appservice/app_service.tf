@@ -1,17 +1,9 @@
-# Create a Resource Group
-resource "azurerm_resource_group" "appservice-rg" {
-  name     = var.rgname
-  location = var.location
-
-  tags = {
-    environment = var.env
-  }
-}
+#App Service Configuration
 
 resource "azurerm_app_service_plan" "service-plan" {
   name                = var.service-plan-name
-  location            = azurerm_resource_group.appservice-rg.location
-  resource_group_name = azurerm_resource_group.appservice-rg.name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
   kind                = var.sevice-plan-kind
   reserved            = true
 
@@ -27,8 +19,8 @@ resource "azurerm_app_service_plan" "service-plan" {
 
 resource "azurerm_app_service" "app-service" {
   name                = var.app-service-name
-  location            = azurerm_resource_group.appservice-rg.location
-  resource_group_name = azurerm_resource_group.appservice-rg.name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.service-plan.id
 
   site_config {

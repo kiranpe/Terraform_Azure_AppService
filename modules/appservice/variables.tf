@@ -1,3 +1,13 @@
+variable "enabled" {
+  type    = bool
+  default = true
+}
+
+variable "disabled" {
+  type    = bool
+  default = false
+}
+
 variable "rgname" {
   type    = string
   default = "WebAppRG"
@@ -6,6 +16,21 @@ variable "rgname" {
 variable "location" {
   type    = string
   default = "EastUS2"
+}
+
+variable "sku_tier" {
+  type    = string
+  default = "Free"
+}
+
+variable "sku_size" {
+  type    = string
+  default = "F1"
+}
+
+variable "dotnet_version" {
+  type    = string
+  default = "v5.0"
 }
 
 variable "env" {
